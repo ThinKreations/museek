@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUSEEK</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Belleza&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="./globals.css" rel="stylesheet"/>
+    <link rel="icon" href="./src/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <header>
+        <div><a href="index.html"><h1 style="font-size: 60px;">Museek</h1></a></div>
+        <div>
+            <a href="index.html" class="btnHeader"><b>Tienda</b></a>
+            <a href="nosotroslosguapos.html" class="btnHeader">Nosotros</a>
+            <a href="ayuda.html" class="btnHeader">Auxilio</a>
+        </div>
+    </header>
+    <div class="container">
+        <p><b>Bienvenido a la mejor página del mundo para comprar música en línea</b></p>
+        <br>
+        Ordenar: 
+        <select class="sortSelect" id="sortSelect">
+            <option class="sortOption">A-Z (Álbum)</option>
+            <option class="sortOption">Z-A (Álbum)</option>
+            <option class="sortOption">A-Z (Artista)</option>
+            <option class="sortOption">Z-A (Artista)</option>
+        </select>
+        <div class="tiendaContainer" id="tiendaContainer">
+        
+        </div>
+    </div>
+    <script src="path.js">
+        
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tiendaContainer = document.getElementById("tiendaContainer");
+            const sortSelect = document.getElementById("sortSelect");
+            function renderAlbums(albums) {
+                tiendaContainer.innerHTML = ""; // Limpiar contenedor
+                albums.forEach(album => {
+                    const card = document.createElement("div");
+                    card.classList.add("card");
+                    card.innerHTML = `
+                        <div>
+                            <center>
+                            <a href="album.html?id=${album.id}">
+                                <img src="${album.cover}" alt="Portada del álbum" class="album1">
+                            </a>
+                        </center>
+                        <p style="font-size:20px">${album.title}</p>
+                        <p style="font-size:14px">${album.artist}</p>
+                        </div>
+                        <p class="precio1">$ ${album.price}</p>
+                    `;
+                    tiendaContainer.appendChild(card);
+                });
+            }
+            function sortAlbums() {
+                let sortedAlbums = [...albumsData.album]; // Copia del array original
+                const sortValue = sortSelect.value;
+                switch (sortValue) {
+                    case "A-Z (Álbum)":
+                        sortedAlbums.sort((a, b) => a.title.localeCompare(b.title));
+                        break;
+                    case "Z-A (Álbum)":
+                        sortedAlbums.sort((a, b) => b.title.localeCompare(a.title));
+                        break;
+                    case "A-Z (Artista)":
+                        sortedAlbums.sort((a, b) => a.artist.localeCompare(b.artist));
+                        break;
+                    case "Z-A (Artista)":
+                        sortedAlbums.sort((a, b) => b.artist.localeCompare(a.artist));
+                        break;
+                }
+                renderAlbums(sortedAlbums);
+            }
+            sortSelect.value = "A-Z (Álbum)";
+            albumsData.album.sort((a, b) => a.title.localeCompare(b.title));
+            renderAlbums(albumsData.album);
+            sortSelect.addEventListener("change", sortAlbums);
+        });
+    </script>
+</body>
+</html>

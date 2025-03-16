@@ -1,0 +1,257 @@
+.nunito-sans-300 {
+font-family: "Nunito Sans", sans-serif;
+font-optical-sizing: auto;
+font-weight: 300;
+font-style: normal;
+}
+.belleza-regular {
+    font-family: "Belleza", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.bebas-neue-regular {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.josefin-sans-300 {
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Nunito Sans';
+}
+body{
+    background-color: rgb(30, 30, 30);
+    color: white;
+    margin-bottom: 15px;
+}
+body::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+body::-webkit-scrollbar:vertical {
+width:10px;
+}
+
+body::-webkit-scrollbar-button:increment,.productoRelacionadoC::-webkit-scrollbar-button {
+display: none;
+} 
+
+body::-webkit-scrollbar-thumb {
+background-color: rgb(60, 60, 60);
+}
+
+body::-webkit-scrollbar-thumb:hover{
+    background-color: rgb(85,85,85);
+    
+}
+
+body::-webkit-scrollbar-track {
+    background-color: rgb(45, 45, 45); 
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 20px;
+    align-items: center;
+    background-color: rgb(45, 45, 45);
+    margin-bottom: 25px;
+    box-shadow: 0px 0px 5px rgb(25, 25, 25);
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+.container{
+    place-items: center;
+}
+.tiendaContainer{
+    margin-top: 20px;
+    width: 97%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 15vw;
+    min-width: 125px;
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px;
+    border-color: black;
+    background-color: rgb(60, 60, 60);
+    margin: 0.2cm;
+    box-shadow: 0px 0px 5px rgb(25, 25, 25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card:hover{
+    background-color: rgb(85, 85, 85);
+    
+}
+/*IMAGENES*/
+.album1{/* en principal */
+    max-width: 15vw;
+    border-radius: 2px;
+    align-self: center;
+}
+.album2{/* en pagina del album */
+    width: 20vw;
+    min-width: 250px;
+    border-radius: 5px;
+    align-self: center;
+    box-shadow: 0px 0px 5px rgb(30, 30, 30);  
+    transition: 0.1s ease-in-out;
+
+}
+.head:hover .album2{
+    box-shadow: 0px 0px 10px rgb(25,25,25);
+}
+/* ALBUM.HTML */
+.head{
+    width: 95vw;
+    border: 1px solid transparent;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px;
+    
+}
+.albumData{
+    max-width: 77%;
+    border: 1px solid 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    
+}.albumData img{
+    margin-right: 25px;
+}
+.botonera{
+    margin: 5px;
+    border: 1px solid transparent;
+}
+/*BOTONES*/
+.btnHeader{
+    margin: 20px;
+}
+.btnHeader:hover{
+    text-shadow: 0px 0px 4px rgb(200,200,200);
+}
+.btnCarro{
+    background-color: transparent;
+    color: white;
+    margin-left: 10px;
+    font-size: 25px;
+    padding: 10px;
+    height: 55px;
+    border: 0px;
+    outline: none;
+    border-radius: 5px;
+}
+.btnCarro:hover{
+    background-color: rgb(40, 40, 40);
+    box-shadow: 0px 0px 5px rgb(30, 30, 30);
+     
+}
+.btnBuy{
+    background-color: rgb(200, 200, 200);
+    margin-left: 10px;
+    font-size: 25px;
+    padding: 10px;
+    height: 55px;
+    border: 0px;
+    outline: none;
+    border-radius: 5px;
+}.btnBuy:hover{
+    background-color: rgb(255, 255, 255);
+}
+.description{
+    border: 1px solid transparent;
+    display: flex;
+    scroll-behavior: smooth;
+    justify-content: space-between;
+    width: 45vw;
+    padding: 10px;
+    text-align: justify;
+}
+.songs{
+    border: 1px solid transparent;
+    border-top:1px solid rgb(100,100,100) ;
+    display: flex;
+    flex-direction: column;
+    margin-right: 25px;
+    padding: 10px;
+    width: 35vw;
+    min-width: 300px;
+}
+.headers{
+    width: 100%;
+    border: 1px solid transparent;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.nosong{
+    width: 10%;
+    color: rgb(120,120,120);
+}
+.songname{
+    width: 70%;
+}
+.duracion{
+    width: 20%;
+    text-align: end;
+}
+.sortSelect{
+    border: 1px solid transparent;
+    outline: none;
+    padding: 5px;
+    background-color: transparent;
+    color: white;
+}
+.sortSelect:hover{
+    text-shadow: 0px 0px 4px rgb(200,200,200);
+}
+.sortOption{
+    color: black;
+}
+@media screen and (max-width: 600px) {
+    .albumData{
+        max-width: 100%;
+        border: 1px solid transparent;
+        display: inline-block;
+        text-align: center;
+    }
+    .album1{
+        width: 50vw;
+    }
+    .album2{
+        width: 100%;
+    }
+    .botonera{
+        width: 100%;
+        margin-top: 15px;
+        border: 1px solid transparent;
+        text-align: center;
+    }
+    
+    .songs{
+        border: 1px solid transparent;
+        width: 100%;
+    }
+    .description{
+        border: 1px solid transparent;
+        width: 85%;
+    }
+}

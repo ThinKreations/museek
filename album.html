@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALBUM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Belleza&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="./globals.css" rel="stylesheet"/>
+    <link rel="icon" href="./src/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div><a href="index.html"><h1 style="font-size: 60px;">Museek</h1></a></div>
+        <div>
+            <a href="index.html" class="btnHeader"><b>Tienda</b></a>
+            <a href="nosotroslosguapos.html" class="btnHeader">Nosotros</a>
+            <a href="ayuda.html" class="btnHeader">Auxilio</a>
+        </div>
+    </header>
+   
+    <div class="container">
+        
+
+        <div class="album" id="album">
+            <a href="./index.html">« Volver </a>
+        <br/>
+        <div class="head">
+            <div class="albumData">
+                <img src="./src/gustavocerati-bocanada.jpg" alt="Portada del álbum" class="album2">
+                <div style="display: flex; flex-direction: column; justify-content: space-around;">
+                    <h1 style="font-size: 40px;">Título del álbum</h1>
+                    <h3><b>Artista:</b>Artista</h3>
+                    <h2><b>Precio:</b>$Precio MXN</h2>
+                </div>
+            </div>
+            
+                <div class="botonera">
+                    <button onclick="" class="btnCarro">Carrito</button>
+                    <button onclick="" class="btnBuy">COMPRAR</button>
+                </div>
+            </div>
+        </div>
+        <div class="head">
+            <div class="songs">
+                <div class="headers" style="color: rgb(150,150,150)">
+                    <p class="nosong">#</p><p class="songname">Nombre de la canción</p><p class="duracion">Tiempo</p>
+                </div>
+            </div>
+            <div>
+                <center><h3>Descripción</h3></center>
+                <div class="description">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    </div>
+    <script src="path.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", ()=>{
+            const params=new URLSearchParams(window.location.search)
+            const id=params.get("id")
+            
+            if (id!==null){
+                const album = albumsData.album.find(a=>a.id===id)
+                if (album){
+                    document.querySelector(".album2").src = album.cover
+                    document.querySelector(".album2").alt = `Portada del álbum ${album.title}`
+                    document.querySelector(".albumData h1").textContent =album.title
+                    document.querySelector(".albumData h3").innerHTML = `
+                    <h3>${album.artist}</h3>  <br>
+                    <p style="color: rgb(140,140,140)">Año: ${album.year}</p>
+                    <p style="color: rgb(140,140,140)">Formato: ${album.format}</p>`
+                    document.querySelector(".albumData h2").innerHTML = `<b>Precio:</b> $${album.price} MXN`
+                    document.querySelector(".description p").textContent= album.description
+                    const songsContainer = document.querySelector(".songs")
+                    album.songs.forEach(song =>{
+                        const songElement = document.createElement("div")
+                        songElement.classList.add("headers")
+                        songElement.innerHTML = `<p class="nosong">${song.n}</p><p class="songname">${song.title}</p><p class="duracion">${song.time}</p>`
+                        songsContainer.appendChild(songElement)
+                    });
+                }else{
+                    document.querySelector(".container").innerHTML = "<p>Álbum no encontrado.</p>"
+                }
+            }else{
+                document.querySelector(".container").innerHTML = "<p>Error: No se proporcionó un ID de álbum.</p>"
+            }
+        })
+    </script>
+</body>
+</html>
