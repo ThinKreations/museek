@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Belleza&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="./globals.css" rel="stylesheet"/>
+    <link rel="icon" href="./src/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <header>
+        <div><a href="index.html"><h1 style="font-size: 60px;">Museek</h1></a></div>
+        <div>
+            <a href="index.html" class="btnHeader">Tienda</a>
+            <a href="nosotroslosguapos.html" class="btnHeader">Nosotros</a>
+            <a href="ayuda.html" class="btnHeader">Auxilio</a>
+            <a href="carrito.html" class="btnHeader"><b>Carrito</b></a>
+        </div>
+    </header>
+    <div class="container">
+        <p><b>Bienvenido a la mejor página del mundo para comprar música en línea</b></p>
+        <br>
+        <div class="headers" style="width: 90%;">
+            <a href="javascript:window.history.back();">« Volver </a>
+            <div>
+                Ordenar: 
+                <select class="sortSelect" id="sortSelect">
+                    <option class="sortOption">A-Z (Álbum)</option>
+                    <option class="sortOption">Z-A (Álbum)</option>
+                    <option class="sortOption">A-Z (Artista)</option>
+                    <option class="sortOption">Z-A (Artista)</option>
+                </select>  
+            </div>
+        </div>
+        
+        <div class="tiendaContainer" id="tiendaContainer">
+        
+        </div>
+        <center><button class="btnBuy" style="margin-top: 20px">Vaciar carrito</button></center>
+    </div>
+    <script src="path.js">
+        
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () =>{
+        const tiendaContainer = document.getElementById("tiendaContainer")
+        const sortSelect = document.getElementById("sortSelect")
+        const btnVaciar = document.querySelector(".btnBuy")
+        const cart = JSON.parse(localStorage.getItem("cart"))||[]
+        let filteredAlbums = albumsData.album.filter(album=>cart.includes(album.id))
+
+        function renderAlbums(albums){
+            tiendaContainer.innerHTML = ""
+            albums.forEach(album =>{
+                const card = document.createElement("div")
+                card.classList.add("card")
+                card.innerHTML = `
+                    <div>
+                        <center>
+                        <a href="album.html?id=${album.id}">
+                            <img src="${album.cover}" alt="Portada del álbum" class="album1">
+                        </a>
+                        </center>
+                        <p style="font-size:20px">${album.title}</p>
+                        <p style="font-size:14px">${album.artist}</p>
+                    </div>
+                    <p class="precio1">$ ${album.price}</p>
+                `
+                tiendaContainer.appendChild(card)
+            })
+        }
+
+        function sortAlbums(){
+            const sortValue = sortSelect.value;
+            switch (sortValue){
+                case "A-Z (Álbum)":
+                    filteredAlbums.sort((a, b)=>a.title.localeCompare(b.title))
+                    break
+                case "Z-A (Álbum)":
+                    filteredAlbums.sort((a, b)=>b.title.localeCompare(a.title))
+                    break
+                case "A-Z (Artista)":
+                    filteredAlbums.sort((a, b)=>a.artist.localeCompare(b.artist))
+                    break
+                case "Z-A (Artista)":
+                    filteredAlbums.sort((a, b)=>b.artist.localeCompare(a.artist))
+                    break
+            }
+            renderAlbums(filteredAlbums)
+        }
+        btnVaciar.addEventListener("click", () =>{
+            localStorage.removeItem("cart")
+            tiendaContainer.innerHTML = "<p>El carrito está vacío.</p>"
+        });
+        sortSelect.value = "A-Z (Álbum)"
+        filteredAlbums.sort((a, b) => a.title.localeCompare(b.title))
+        renderAlbums(filteredAlbums)
+        sortSelect.addEventListener("change", sortAlbums)
+        })
+    </script>
+</body>
+</html>

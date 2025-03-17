@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALBUM</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Belleza&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -17,14 +16,19 @@
             <a href="index.html" class="btnHeader"><b>Tienda</b></a>
             <a href="nosotroslosguapos.html" class="btnHeader">Nosotros</a>
             <a href="ayuda.html" class="btnHeader">Auxilio</a>
+            <a href="carrito.html" class="btnHeader">Carrito</a>
         </div>
     </header>
-   
     <div class="container">
-        
+        <div class="headers" style="width: 90%;">
+            <a href="javascript:window.history.back();">« Volver </a>
+            <div>
+                  
+            </div>
+        </div>
 
         <div class="album" id="album">
-            <a href="./index.html">« Volver </a>
+            
         <br/>
         <div class="head">
             <div class="albumData">
@@ -37,7 +41,7 @@
             </div>
             
                 <div class="botonera">
-                    <button onclick="" class="btnCarro">Carrito</button>
+                    <button onclick="" class="btnCarro">+ Carrito</button>
                     <button onclick="" class="btnBuy">COMPRAR</button>
                 </div>
             </div>
@@ -67,6 +71,7 @@
             
             if (id!==null){
                 const album = albumsData.album.find(a=>a.id===id)
+                document.title=album.title
                 if (album){
                     document.querySelector(".album2").src = album.cover
                     document.querySelector(".album2").alt = `Portada del álbum ${album.title}`
@@ -83,6 +88,14 @@
                         songElement.classList.add("headers")
                         songElement.innerHTML = `<p class="nosong">${song.n}</p><p class="songname">${song.title}</p><p class="duracion">${song.time}</p>`
                         songsContainer.appendChild(songElement)
+                    });
+                    document.querySelector(".btnCarro").addEventListener("click", ()=>{
+                        let cart=JSON.parse(localStorage.getItem("cart"))||[];
+                        if (!cart.includes(id)){
+                            cart.push(id);
+                            localStorage.setItem("cart", JSON.stringify(cart));
+                        }
+                        window.location.href = "./carrito.html";
                     });
                 }else{
                     document.querySelector(".container").innerHTML = "<p>Álbum no encontrado.</p>"
